@@ -18,6 +18,8 @@ find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(rclcpp_components REQUIRED)
 find_package(rcl_interfaces REQUIRED)
+find_package(geometry_msgs REQUIRED)
+find_package(tf2 REQUIRED)
 find_package(Threads REQUIRED)
 
 include_directories(
@@ -29,18 +31,16 @@ include_directories(
 ## |                       compile                              |
 ## --------------------------------------------------------------
 
-add_library(fog_lib SHARED
-  src/fog_lib.cpp
+add_library(misc SHARED
+  src/misc.cpp
   )
 
-target_compile_definitions(fog_lib
-  PRIVATE "${PROJECT_NAME}_BUILDING_DLL")
+add_library(cyclic SHARED
+  src/geometry/cyclic.cpp
+  )
 
-ament_target_dependencies(fog_lib
-  rclcpp
-  rclcpp_components
-  rcl_interfaces
-  Threads
+add_library(geometry_misc SHARED
+  src/geometry/misc.cpp
   )
 
 ## --------------------------------------------------------------
@@ -48,7 +48,9 @@ ament_target_dependencies(fog_lib
 ## --------------------------------------------------------------
 
 install(TARGETS
-  fog_lib
+  misc
+  cyclic
+  geometry_misc
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib
   RUNTIME DESTINATION bin
@@ -59,5 +61,11 @@ install(DIRECTORY include
 )
 
 ament_export_include_directories(include)
+
+ament_export_libraries(
+  misc
+  cyclic
+  geometry_misc
+)
 
 ament_package()
