@@ -35,6 +35,10 @@ add_library(misc SHARED
   src/misc.cpp
   )
 
+add_library(scope_timer SHARED
+  src/scope_timer.cpp
+  )
+
 add_library(cyclic SHARED
   src/geometry/cyclic.cpp
   )
@@ -49,6 +53,7 @@ add_library(geometry_misc SHARED
 
 install(TARGETS
   misc
+  scope_timer
   cyclic
   geometry_misc
   ARCHIVE DESTINATION lib
@@ -64,6 +69,7 @@ ament_export_include_directories(include)
 
 ament_export_libraries(
   misc
+  scope_timer
   cyclic
   geometry_misc
 )

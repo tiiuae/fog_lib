@@ -31,6 +31,27 @@ namespace fog_lib
     }
 
     /*!
+     * \brief Calculates heading from the quaternion.
+     *
+     * The heading is the counterclockwise angle of a projection of the quaternion's direction vector to the XY plane from the X axis.
+     *
+     * \param q the quaterion to obtain the heading from.
+     * \return the heading in range [-pi, pi]
+     */
+    double quat2heading(const tf2::Quaternion& q)
+    {
+      quat_t eq;
+      eq.x() = q.x();
+      eq.y() = q.y();
+      eq.z() = q.z();
+      eq.w() = q.w();
+      // obtain the direction vector of q
+      const vec3_t dir = eq*vec3_t::UnitX();
+      // calculate the angle of its projection to the XY plane from the X axis
+      return std::atan2(dir.y(), dir.x());
+    }
+
+    /*!
      * \brief Calculates quaternion from the heading.
      *
      * The heading is the counterclockwise angle of a projection of the quaternion's direction vector to the XY plane from the X axis.

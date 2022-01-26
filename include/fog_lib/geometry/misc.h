@@ -29,6 +29,16 @@ namespace fog_lib
     double quat2heading(const geometry_msgs::msg::Quaternion& q);
 
     /*!
+     * \brief Calculates heading from the quaternion.
+     *
+     * The heading is the counterclockwise angle of a projection of the quaternion's direction vector to the XY plane from the X axis.
+     *
+     * \param q the quaterion to obtain the heading from.
+     * \return the heading in range [-pi, pi].
+     */
+    double quat2heading(const tf2::Quaternion& q);
+
+    /*!
      * \brief Calculates quaternion from the heading.
      *
      * The heading is the counterclockwise angle of a projection of the quaternion's direction vector to the XY plane from the X axis.
