@@ -3,7 +3,7 @@
 <package format="3">
 
   <name>fog_lib</name>
-  <version>0.0.8</version>
+  <version>0.1.0</version>
   <description>Common classes, functions and utilities for the fog software. Based on mrs_lib (https://github.com/ctu-mrs/mrs_lib)</description>
   <maintainer email="matous.vrba@fly4future.com">Matouš Vrba</maintainer>
   <author email="matous.vrba@fly4future.com">Matouš Vrba</author>
