@@ -2,7 +2,7 @@
 Changelog for package fog_lib
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
+0.1.0 (2022-02-03)
 -----------
 * added scope_timer and quat2heading for tf2 quaternion
 * added the cyclic library, moved some common functions from control interface and navigation here
