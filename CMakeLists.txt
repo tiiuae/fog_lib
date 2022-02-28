@@ -39,6 +39,10 @@ add_library(scope_timer SHARED
   src/scope_timer.cpp
   )
 
+add_library(median_filter SHARED
+  src/median_filter.cpp
+  )
+
 add_library(cyclic SHARED
   src/geometry/cyclic.cpp
   )
@@ -54,6 +58,7 @@ add_library(geometry_misc SHARED
 install(TARGETS
   misc
   scope_timer
+  median_filter
   cyclic
   geometry_misc
   ARCHIVE DESTINATION lib
@@ -70,6 +75,7 @@ ament_export_include_directories(include)
 ament_export_libraries(
   misc
   scope_timer
+  median_filter
   cyclic
   geometry_misc
 )
