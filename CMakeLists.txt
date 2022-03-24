@@ -80,4 +80,18 @@ ament_export_libraries(
   geometry_misc
 )
 
+## --------------------------------------------------------------
+## |                           testing                          |
+## --------------------------------------------------------------
+
+if(BUILD_TESTING)
+  # Include linting tests
+  # find_package(ament_lint_auto REQUIRED)
+  # ament_lint_auto_find_test_dependencies()
+
+  find_package(ament_cmake_gtest REQUIRED)
+  ament_add_gtest(geometry_test test/geometry/geometry_tests.cpp)
+
+endif()
+
 ament_package()
