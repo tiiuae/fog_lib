@@ -91,6 +91,7 @@ if(BUILD_TESTING)
 
   find_package(ament_cmake_gtest REQUIRED)
   ament_add_gtest(geometry_test test/geometry/geometry_tests.cpp)
+  ament_add_gtest(median_filter_test test/median_filter/tests.cpp src/median_filter.cpp)
 
 endif()
 
