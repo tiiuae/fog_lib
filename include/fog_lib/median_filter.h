@@ -1,15 +1,15 @@
 #ifndef MEDIAN_FILTER
 #define MEDIAN_FILTER
 
-/**  \file MUTEX_UTILS
-     \brief MUTEX_UTILS defines helper routines for getting and setting variables under mutex locks
+/**  \file
+     \brief Defines the MedianFilter class.
      \author Daniel Hert
      \author Matouš Vrba - matous.vrba@fel.cvut.cz
  */
 
 #include <boost/circular_buffer.hpp>
-#include <rclcpp/rclcpp.hpp>
 #include <mutex>
+#include <cmath>
 
 namespace fog_lib
 {
