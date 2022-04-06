@@ -37,7 +37,7 @@ jobs:
 
     steps:
 
-      - name: get ros2 distro
+      - name: Download ROS2-Galactic
         uses: ros-tooling/setup-ros@v0.2
         with:
           required-ros-distributions: galactic
