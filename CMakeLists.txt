@@ -39,6 +39,10 @@ add_library(scope_timer SHARED
   src/scope_timer.cpp
   )
 
+add_library(median_filter SHARED
+  src/median_filter.cpp
+  )
+
 add_library(cyclic SHARED
   src/geometry/cyclic.cpp
   )
@@ -54,6 +58,7 @@ add_library(geometry_misc SHARED
 install(TARGETS
   misc
   scope_timer
+  median_filter
   cyclic
   geometry_misc
   ARCHIVE DESTINATION lib
@@ -70,8 +75,24 @@ ament_export_include_directories(include)
 ament_export_libraries(
   misc
   scope_timer
+  median_filter
   cyclic
   geometry_misc
 )
+
+## --------------------------------------------------------------
+## |                           testing                          |
+## --------------------------------------------------------------
+
+if(BUILD_TESTING)
+  # Include linting tests
+  # find_package(ament_lint_auto REQUIRED)
+  # ament_lint_auto_find_test_dependencies()
+
+  find_package(ament_cmake_gtest REQUIRED)
+  ament_add_gtest(geometry_test test/geometry/geometry_tests.cpp)
+  ament_add_gtest(median_filter_test test/median_filter/tests.cpp src/median_filter.cpp)
+
+endif()
 
 ament_package()
