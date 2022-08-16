@@ -49,6 +49,14 @@ namespace fog_lib
     return true;
   }
 
+  template <class T>
+  T parse_param2(const std::string &param_name, bool& ok_out, rclcpp::Node& node)
+  {
+    T out;
+    ok_out = parse_param(param_name, out, node);
+    return out;
+  }
+
 }
 
 #endif // PARAMS_H
