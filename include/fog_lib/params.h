@@ -15,14 +15,15 @@ namespace fog_lib
 #else
     node.declare_parameter<T>(param_name); // for Galactic and newer
 #endif
-    if (!node.get_parameter(param_name, param_dest))
+    try
     {
-      RCLCPP_ERROR(node.get_logger(), "Could not load param '%s'", param_name.c_str());
-      return false;
-    }
-    else
-    {
+      node.get_parameter(param_name, param_dest);
       RCLCPP_INFO_STREAM(node.get_logger(), "Loaded '" << param_name << "' = '" << param_dest << "'");
+    }
+    catch (const rclcpp::ParameterTypeException& e)
+    {
+      RCLCPP_ERROR_STREAM(node.get_logger(), "Could not load param '" << param_name << "': " << e.what());
+      return false;
     }
     return true;
   }
@@ -36,15 +37,16 @@ namespace fog_lib
     node.declare_parameter<T>(param_name); // for Galactic and newer
 #endif
     T tmp;
-    if (!node.get_parameter(param_name, tmp))
+    try
     {
-      RCLCPP_ERROR(node.get_logger(), "Could not load param '%s'", param_name.c_str());
-      return false;
-    }
-    else
-    {
+      node.get_parameter(param_name, tmp);
       param_dest = rclcpp::Duration::from_seconds(tmp);
-      RCLCPP_INFO_STREAM(node.get_logger(), "Loaded '" << param_name << "' = '" << tmp << "s'");
+      RCLCPP_INFO_STREAM(node.get_logger(), "Loaded '" << param_name << "' = " << tmp << "s");
+    }
+    catch (const rclcpp::ParameterTypeException& e)
+    {
+      RCLCPP_ERROR_STREAM(node.get_logger(), "Could not load param '" << param_name << "': " << e.what());
+      return false;
     }
     return true;
   }
@@ -53,6 +55,14 @@ namespace fog_lib
   T parse_param2(const std::string &param_name, bool& ok_out, rclcpp::Node& node)
   {
     T out;
+    ok_out = parse_param(param_name, out, node);
+    return out;
+  }
+
+  template <>
+  rclcpp::Duration parse_param2(const std::string &param_name, bool& ok_out, rclcpp::Node& node)
+  {
+    rclcpp::Duration out = rclcpp::Duration::from_seconds(0);
     ok_out = parse_param(param_name, out, node);
     return out;
   }
