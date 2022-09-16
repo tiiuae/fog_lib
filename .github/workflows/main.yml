@@ -31,7 +31,7 @@ jobs:
         run: |
           set -eux
           mkdir bin
-          ./build_deb.sh  ../../bin/
+          ./build_deb.sh  bin
       - name: Upload build
         uses: actions/upload-artifact@v2
         with:
