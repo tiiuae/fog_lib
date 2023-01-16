@@ -10,13 +10,13 @@ namespace fog_lib
   template <class T>
   bool parse_param(const std::string &param_name, T &param_dest, rclcpp::Node& node)
   {
-#ifdef ROS_FOXY
-    node.declare_parameter(param_name); // for Foxy
-#else
-    node.declare_parameter<T>(param_name); // for Galactic and newer
-#endif
     try
     {
+#ifdef ROS_FOXY
+      node.declare_parameter(param_name); // for Foxy
+#else
+      node.declare_parameter<T>(param_name); // for Galactic and newer
+#endif
       node.get_parameter(param_name, param_dest);
       RCLCPP_INFO_STREAM(node.get_logger(), "Loaded '" << param_name << "' = '" << param_dest << "'");
     }
@@ -31,14 +31,13 @@ namespace fog_lib
   template <class T>
   bool parse_param(const std::string& param_name, std::vector<T>& param_dest, rclcpp::Node& node)
   {
-#ifdef ROS_FOXY
-    node.declare_parameter(param_name); // for Foxy
-#else
-    node.declare_parameter<std::vector<T>>(param_name); // for Galactic and newer
-#endif
-    T tmp;
     try
     {
+#ifdef ROS_FOXY
+      node.declare_parameter(param_name); // for Foxy
+#else
+      node.declare_parameter<std::vector<T>>(param_name); // for Galactic and newer
+#endif
       node.get_parameter(param_name, param_dest);
       RCLCPP_INFO_STREAM(node.get_logger(), "Loaded '" << param_name << "' = ");
       for (const auto& el : param_dest)
@@ -54,15 +53,15 @@ namespace fog_lib
 
   bool parse_param(const std::string& param_name, rclcpp::Duration& param_dest, rclcpp::Node& node)
   {
-    using T = double;
-#ifdef ROS_FOXY
-    node.declare_parameter(param_name); // for Foxy
-#else
-    node.declare_parameter<T>(param_name); // for Galactic and newer
-#endif
-    T tmp;
     try
     {
+      using T = double;
+#ifdef ROS_FOXY
+      node.declare_parameter(param_name); // for Foxy
+#else
+      node.declare_parameter<T>(param_name); // for Galactic and newer
+#endif
+      T tmp;
       node.get_parameter(param_name, tmp);
       param_dest = rclcpp::Duration::from_seconds(tmp);
       RCLCPP_INFO_STREAM(node.get_logger(), "Loaded '" << param_name << "' = " << tmp << "s");
