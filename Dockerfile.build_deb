@@ -1,4 +1,4 @@
-FROM ghcr.io/tiiuae/fog-ros-baseimage:builder-3dcb78d
+FROM ghcr.io/tiiuae/fog-ros-baseimage:builder-galactic-eol
 ARG GIT_RUN_NUMBER
 ARG GIT_COMMIT_HASH
 ARG GIT_VERSION_STRING
