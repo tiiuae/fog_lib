@@ -22,6 +22,8 @@ jobs:
     steps:
       - name: Checkout fog_lib
         uses: actions/checkout@v2
+        with:
+          path: fog_lib
 
       - name: Run fog_lib docker build
         env:
@@ -31,7 +33,9 @@ jobs:
         run: |
           set -eux
           mkdir bin
+          pushd fog_lib
           ./build_deb.sh  bin
+          popd
       - name: Upload build
         uses: actions/upload-artifact@v2
         with:
@@ -60,7 +64,6 @@ jobs:
           ARCHITECTURE: amd64
           BUILD_NAME: fog_lib
           CI: true
-        if: github.event_name == 'push'
         run: |
           set -exu
           jfrog rt ping
