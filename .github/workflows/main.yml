@@ -2,13 +2,13 @@ name: Push fog_lib to Artifactory
 
 on:
   push:
-    branches: [ master ]
+    branches: [ master, workflow_fix ]
     paths-ignore:
       - '**/README.md'
       - '**.yaml'
       - '**.yml'
   pull_request:
-    branches: [ master ]
+    branches: [ master, workflow_fix ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
