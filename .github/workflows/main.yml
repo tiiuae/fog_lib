@@ -34,7 +34,7 @@ jobs:
           set -eux
           mkdir bin
           pushd fog_lib
-          ./build_deb.sh  ../bin/
+          ./build_deb.sh  bin
           popd
       - name: Upload build
         uses: actions/upload-artifact@v2
