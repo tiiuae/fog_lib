@@ -34,7 +34,7 @@ jobs:
           set -eux
           mkdir bin
           pushd fog_lib
-          ./build_deb.sh  bin
+          ./build_deb.sh  ../bin/
           popd
       - name: Upload build
         uses: actions/upload-artifact@v2
@@ -46,7 +46,7 @@ jobs:
   artifactory:
     runs-on: ubuntu-latest
     needs: tii-deb-build
-    if: github.event_name == 'push'
+    if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
     steps:
       - name: Download builds
         uses: actions/download-artifact@v2
