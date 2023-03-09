@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        ros2_distro: [galactic]
+        ros2_distro: [humble]
     steps:
       - name: Checkout fog_lib
         uses: actions/checkout@v2
@@ -59,7 +59,7 @@ jobs:
       - name: Upload to Artifactory
         env:
           ARTIFACTORY_REPO: ssrc-deb-public-local
-          DISTRIBUTION: focal
+          DISTRIBUTION: jammy
           COMPONENT: fog-sw
           ARCHITECTURE: amd64
           BUILD_NAME: fog_lib
