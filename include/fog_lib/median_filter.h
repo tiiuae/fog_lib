@@ -10,6 +10,7 @@
 #include <boost/circular_buffer.hpp>
 #include <mutex>
 #include <cmath>
+#include <optional>
 
 namespace fog_lib
 {

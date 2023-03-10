@@ -3,11 +3,11 @@
 
 #include <eigen3/Eigen/Eigen>
 #include <eigen3/Eigen/src/Geometry/AngleAxis.h>
-#include <geometry_msgs/msg/pose.hpp>
-#include <tf2/LinearMath/Quaternion.h>
-#include <tf2_geometry_msgs/tf2_geometry_msgs.h>  // This has to be here otherwise you will get cryptic linker error about missing function 'getTimestamp'
-
 #include <fog_lib/geometry/cyclic.h>
+#include <tf2/LinearMath/Quaternion.h>
+#include "geometry_msgs/msg/pose.hpp"
+#include "tf2_geometry_msgs/tf2_geometry_msgs.hpp"  // This has to be here otherwise you will get cryptic linker error about missing function 'getTimestamp'
+
 
 namespace fog_lib
 {

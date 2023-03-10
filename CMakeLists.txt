@@ -16,10 +16,9 @@ endif()
 
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
-find_package(rclcpp_components REQUIRED)
-find_package(rcl_interfaces REQUIRED)
 find_package(geometry_msgs REQUIRED)
 find_package(tf2 REQUIRED)
+find_package(tf2_geometry_msgs REQUIRED)
 find_package(Threads REQUIRED)
 
 include_directories(
@@ -31,6 +30,13 @@ include_directories(
 ## |                       compile                              |
 ## --------------------------------------------------------------
 
+set(dependencies
+  rclcpp
+  geometry_msgs
+  tf2
+  tf2_geometry_msgs
+)
+
 add_library(misc SHARED
   src/misc.cpp
   )
@@ -38,6 +44,8 @@ add_library(misc SHARED
 add_library(scope_timer SHARED
   src/scope_timer.cpp
   )
+
+ament_target_dependencies(scope_timer rclcpp)
 
 add_library(median_filter SHARED
   src/median_filter.cpp
@@ -51,6 +59,11 @@ add_library(geometry_misc SHARED
   src/geometry/misc.cpp
   )
 
+ament_target_dependencies(geometry_misc
+  geometry_msgs
+  tf2
+  tf2_geometry_msgs
+  )
 ## --------------------------------------------------------------
 ## |                           install                          |
 ## --------------------------------------------------------------
@@ -79,6 +92,7 @@ ament_export_libraries(
   cyclic
   geometry_misc
 )
+ament_export_dependencies(${dependencies})
 
 ## --------------------------------------------------------------
 ## |                           testing                          |
@@ -91,6 +105,7 @@ if(BUILD_TESTING)
 
   find_package(ament_cmake_gtest REQUIRED)
   ament_add_gtest(geometry_test test/geometry/geometry_tests.cpp)
+  ament_target_dependencies(geometry_test geometry_msgs tf2 tf2_geometry_msgs)
   ament_add_gtest(median_filter_test test/median_filter/tests.cpp src/median_filter.cpp)
 
 endif()
