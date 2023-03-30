@@ -5,8 +5,14 @@
 #include <eigen3/Eigen/src/Geometry/AngleAxis.h>
 #include <fog_lib/geometry/cyclic.h>
 #include <tf2/LinearMath/Quaternion.h>
-#include "geometry_msgs/msg/pose.hpp"
-#include "tf2_geometry_msgs/tf2_geometry_msgs.hpp"  // This has to be here otherwise you will get cryptic linker error about missing function 'getTimestamp'
+#include <geometry_msgs/msg/pose.hpp>
+
+#ifdef ROS_GALACTIC
+#include <tf2_geometry_msgs/tf2_geometry_msgs.h>  // This has to be here otherwise you will get cryptic linker error about missing function 'getTimestamp'
+#else
+#include <tf2_geometry_msgs/tf2_geometry_msgs.hpp>  // This has to be here otherwise you will get cryptic linker error about missing function 'getTimestamp'
+#endif
+
 
 
 namespace fog_lib

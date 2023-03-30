@@ -10,8 +10,13 @@ add_definitions("-Wextra")
 add_definitions("-Wpedantic")
 add_definitions("-g")
 add_definitions("-O3")
+
 if ("$ENV{ROS_DISTRO}" STREQUAL "foxy") # to select the correct version of declare_parameter() and avoid errors/warnings
   add_definitions("-DROS_FOXY")
+endif()
+
+if ("$ENV{ROS_DISTRO}" STREQUAL "galactic")
+  add_definitions("-DROS_GALACTIC")
 endif()
 
 find_package(ament_cmake REQUIRED)
