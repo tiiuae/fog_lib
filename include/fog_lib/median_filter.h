@@ -11,6 +11,7 @@
 #include <mutex>
 #include <cmath>
 #include <optional>
+#include <vector>
 
 namespace fog_lib
 {
