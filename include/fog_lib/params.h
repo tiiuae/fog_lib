@@ -25,11 +25,13 @@ namespace fog_lib
       RCLCPP_ERROR_STREAM(node.get_logger(), "Could not load param '" << param_name << "': " << e.what());
       return false;
     }
+#if ! defined(ROS_FOXY) && ! defined(ROS_GALACTIC)
     catch (const rclcpp::exceptions::UninitializedStaticallyTypedParameterException& e)
     {
       RCLCPP_ERROR_STREAM(node.get_logger(), "Could not load param '" << param_name << "': " << e.what());
       return false;
     }
+#endif
     return true;
   }
 
@@ -53,11 +55,13 @@ namespace fog_lib
       RCLCPP_ERROR_STREAM(node.get_logger(), "Could not load param '" << param_name << "': " << e.what());
       return false;
     }
+#if ! defined(ROS_FOXY) && ! defined(ROS_GALACTIC)
     catch (const rclcpp::exceptions::UninitializedStaticallyTypedParameterException& e)
     {
       RCLCPP_ERROR_STREAM(node.get_logger(), "Could not load param '" << param_name << "': " << e.what());
       return false;
     }
+#endif
     return true;
   }
 
