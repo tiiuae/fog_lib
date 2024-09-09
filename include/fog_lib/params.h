@@ -25,6 +25,11 @@ namespace fog_lib
       RCLCPP_ERROR_STREAM(node.get_logger(), "Could not load param '" << param_name << "': " << e.what());
       return false;
     }
+    catch (const rclcpp::exceptions::UninitializedStaticallyTypedParameterException& e)
+    {
+      RCLCPP_ERROR_STREAM(node.get_logger(), "Could not load param '" << param_name << "': " << e.what());
+      return false;
+    }
     return true;
   }
 
@@ -48,30 +53,21 @@ namespace fog_lib
       RCLCPP_ERROR_STREAM(node.get_logger(), "Could not load param '" << param_name << "': " << e.what());
       return false;
     }
-    return true;
-  }
-
-  bool parse_param(const std::string& param_name, rclcpp::Duration& param_dest, rclcpp::Node& node)
-  {
-    try
-    {
-      using T = double;
-#ifdef ROS_FOXY
-      node.declare_parameter(param_name); // for Foxy
-#else
-      node.declare_parameter<T>(param_name); // for Galactic and newer
-#endif
-      T tmp;
-      node.get_parameter(param_name, tmp);
-      param_dest = rclcpp::Duration::from_seconds(tmp);
-      RCLCPP_INFO_STREAM(node.get_logger(), "Loaded '" << param_name << "' = " << tmp << "s");
-    }
-    catch (const rclcpp::ParameterTypeException& e)
+    catch (const rclcpp::exceptions::UninitializedStaticallyTypedParameterException& e)
     {
       RCLCPP_ERROR_STREAM(node.get_logger(), "Could not load param '" << param_name << "': " << e.what());
       return false;
     }
     return true;
+  }
+
+  bool parse_param(const std::string& param_name, rclcpp::Duration& param_dest, rclcpp::Node& node)
+  {
+    double tmp;
+    const bool ok_out = parse_param<double>(param_name, tmp, node);
+    if (ok_out)
+      param_dest = rclcpp::Duration::from_seconds(tmp);
+    return ok_out;
   }
 
   template <class T>
